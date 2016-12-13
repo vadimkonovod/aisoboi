@@ -22,7 +22,7 @@
         required: true
 
     responses:
-      **200:**
+      200:
         body:
           application/json:
             example:  {
@@ -38,7 +38,7 @@
                         ]
                       }
 
-      **400:**
+      400:
         description: Returned in case invalid parameters are provided.
         body:  
           application/json:
@@ -82,7 +82,7 @@
                      }
 
       415:
-        description: Returned in the event that the end point doesn't support the media-type specified in the Content-Type header.
+        description: Returned if endpoint doesn't support the media-type specified in the Content-Type header.
         body:
           application/json:
             example: {
