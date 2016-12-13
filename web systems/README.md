@@ -1,5 +1,5 @@
 # Embassy of Singapore API #
-----
+
 **URL:** `/time-slots`
 
 **Method:** `GET` <br />
@@ -22,7 +22,7 @@
         required: true
 
     responses:
-      200:
+      **200:**
         body:
           application/json:
             example:  {
@@ -38,7 +38,7 @@
                         ]
                       }
 
-      400:
+      **400:**
         description: Returned in case invalid parameters are provided.
         body:  
           application/json:
@@ -67,25 +67,25 @@
         description: Server cannot process the request due to a client error.
         body:
           application/json:
-            example: ```{
+            example: {
                       "code": 400,
                       "message": "Unparsable payload"
-                     }```
+                     }
 
       406:
         description: Returned in case the Accept header contains media type unsupported by endpoint.
         body:
           application/json:
-            example: ```{
+            example: {
                       "code": 406,
                       "message": "Requested representation format is invalid"
-                     }```
+                     }
 
       415:
         description: Returned in the event that the end point doesn't support the media-type specified in the Content-Type header.
         body:
           application/json:
-            example: ```{
+            example: {
                       "code": 415,
                       "message": "Content-type should be specified. Available formats: application/json"
-                     }```
+                     }
