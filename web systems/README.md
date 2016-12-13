@@ -1,9 +1,9 @@
 # Embassy of Singapore API #
 
-/time-slots:
-  get:
-    description: 
-      Endpoint for fetching free time slots in specified date range
+**URL: embassy/singapore/time-slots**
+
+**Method: GET**
+**Description: Endpoint for fetching free time slots in specified date range.**
 
     headers:
       Accept:
@@ -47,15 +47,14 @@
                       "message": "Invalid params: date 'to' must be greater than or equal to 'from'"
                      }
 
-  post:
-    description:
-      Endpoint for booking a free time slot.
+
+**Method: POST**
+**Description: Endpoint for booking a free time slot.**
 
     body:
       application/json:
         example:  {
-                    "name": "Peter",
-                    "year": "Kasper Schmeichel",
+                    "name": "Kasper Schmeichel",
                     "date": "12-12-2016",
                     "time": "9:30"
                   }
