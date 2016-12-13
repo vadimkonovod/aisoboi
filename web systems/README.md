@@ -1,10 +1,10 @@
 # Embassy of Singapore API #
 
-**URL: embassy/singapore/time-slots**
+**URL:** /time-slots
 
-* **Method: GET**
+* **Method:** GET
 
-**Description: Endpoint for fetching free time slots in specified date range.**
+  **Description:** Endpoint for fetching free time slots in specified date range.
 
     headers:
       Accept:
