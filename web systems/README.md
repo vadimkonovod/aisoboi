@@ -2,8 +2,8 @@
 
 **URL:** /time-slots
 
-* **Method:** *GET*
-  **Description:** *Endpoint for fetching free time slots in specified date range.*
+**Method:** *GET*
+**Description:** *Endpoint for fetching free time slots in specified date range.*
 
     headers:
       Accept:
