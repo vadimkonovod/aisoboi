@@ -48,8 +48,8 @@
                      }
 
 
-**Method: POST**
-**Description: Endpoint for booking a free time slot.**
+**Method:** *POST*
+**Description:** *Endpoint for booking a free time slot.*
 
     body:
       application/json:
