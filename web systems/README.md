@@ -1,4 +1,4 @@
-title: Embassy of Singapore API
+# Embassy of Singapore API #
 
 /time-slots:
   get:
@@ -12,12 +12,12 @@ title: Embassy of Singapore API
 
     queryParameters:
       from:
-TODO    description: Can be used for setting the position of the first result to retrieve.
+        description: Can be used for setting the position of the first result to retrieve.
         type: string
         required: true
 
       to:
-TODO    description: Can be used for setting the maximum number of results to retrieve.
+        description: Can be used for setting the maximum number of results to retrieve.
         type: string
         required: true
 
@@ -44,7 +44,7 @@ TODO    description: Can be used for setting the maximum number of results to re
           application/json:
             example: {
                       "code": 400,
- TODO                 "message": "Invalid params: date 'to' must be greater than or equal to 'from'"
+                      "message": "Invalid params: date 'to' must be greater than or equal to 'from'"
                      }
 
   post:
