@@ -1,9 +1,9 @@
 # Embassy of Singapore API #
+----
+**URL:** `/time-slots`
 
-**URL:** /time-slots
-
-**Method:** *GET*
-**Description:** *Endpoint for fetching free time slots in specified date range.*
+**Method:** `GET` <br />
+**Description:** `Endpoint for fetching free time slots in specified date range.`
 
     headers:
       Accept:
@@ -48,8 +48,8 @@
                      }
 
 
-**Method:** *POST*
-**Description:** *Endpoint for booking a free time slot.*
+**Method:** `POST` <br /> 
+**Description:** `Endpoint for booking a free time slot.`
 
     body:
       application/json:
@@ -64,28 +64,28 @@
         description: Returned in case time slot was successfully booked.
 
       400:
-        description: Indicates that the server cannot process the request due to a client error (e.g., malformed request syntax, invalid request).
+        description: Server cannot process the request due to a client error.
         body:
           application/json:
-            example: {
+            example: ```{
                       "code": 400,
                       "message": "Unparsable payload"
-                     }
+                     }```
 
       406:
-        description: Returned in case the Accept header contains media type unsupported by end point
+        description: Returned in case the Accept header contains media type unsupported by endpoint.
         body:
           application/json:
-            example: {
+            example: ```{
                       "code": 406,
                       "message": "Requested representation format is invalid"
-                     }
+                     }```
 
       415:
         description: Returned in the event that the end point doesn't support the media-type specified in the Content-Type header.
         body:
           application/json:
-            example: {
+            example: ```{
                       "code": 415,
-                      "message": "Content-type should be specified. Available formats: application/xml, application/json"
-                     }
+                      "message": "Content-type should be specified. Available formats: application/json"
+                     }```
