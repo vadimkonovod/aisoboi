@@ -60,7 +60,7 @@
         headers: 
           Location:
             description: relative URL to the booked time slot.
-            example: time-slots/:id
+            example: time-slots/{id}
             type: string
         body:
           application/json:
@@ -128,11 +128,11 @@
                        "name": "Kasper Schmeichel"
                      }
 
-      400:
-        description: Returned in case invalid parameters are provided.
+      404:
+        description: Returned in case time slot not found.
         body:  
           application/json:
             example: {
-                      "code": 400,
-                      "message": "Invalid params: 'from' date can't be greater than 'to' date"
+                      "code": 404,
+                      "message": "Time slot with ID 123 not found"
                      }
