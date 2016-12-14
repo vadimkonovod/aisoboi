@@ -133,8 +133,7 @@
 
     responses:
       204:
-        body:
-          NO CONTENT
+        body: NO CONTENT
 
       404:
         description: Returned in case time slot not found.
