@@ -133,6 +133,7 @@
 
     responses:
       204:
+        description: Returned in case time slot was successfully released.
         body: NO CONTENT
 
       404:
