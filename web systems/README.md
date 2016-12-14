@@ -88,24 +88,6 @@
                       "message": "Unparsable payload"
                      }
 
-      406:
-        description: Returned in case the Accept header contains media type unsupported by endpoint.
-        body:
-          application/json:
-            example: {
-                      "code": 406,
-                      "message": "Requested representation format is invalid"
-                     }
-
-      415:
-        description: Returned if endpoint doesn't support the media-type specified in the Content-Type header.
-        body:
-          application/json:
-            example: {
-                      "code": 415,
-                      "message": "Content-type should be specified. Available formats: application/json"
-                     }
-
 
 **URL:** `/time-slots/{id}`
 
