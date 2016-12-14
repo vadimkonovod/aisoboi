@@ -65,6 +65,7 @@
         body:
           application/json:
             example: {
+                       "id": 11,
                        "date": "12-12-2016",
                        "time": "9:30",
                        "name": "Kasper Schmeichel"
@@ -105,10 +106,35 @@
         body:
           application/json:
             example: {
+                       "id": 11,
                        "date": "12-12-2016",
                        "time": "9:30",
                        "name": "Kasper Schmeichel"
                      }
+
+      404:
+        description: Returned in case time slot not found.
+        body:  
+          application/json:
+            example: {
+                      "code": 404,
+                      "message": "Time slot with ID 123 not found"
+                     }
+
+
+**Method:** `DELETE` <br />
+**Description:** `Endpoint for releasing of the time slot by its id.`
+
+    uriParameters:
+      id:
+        description: time slot id.
+        type: integer
+        required: true
+
+    responses:
+      204:
+        body:
+          NO CONTENT
 
       404:
         description: Returned in case time slot not found.
