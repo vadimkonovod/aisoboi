@@ -3,22 +3,17 @@
 **URL:** `/time-slots`
 
 **Method:** `GET` <br />
-**Description:** `Endpoint for fetching free time slots in specified date range.`
-
-    headers:
-      Accept:
-        enum: [application/json]
-        example: application/json
+**Description:** `Endpoint for fetching free time slots in given date range.`
 
     queryParameters:
       from:
-        description: Can be used for setting the position of the first result to retrieve.
-        type: string
+        description: minimum date of time slot.
+        type: date
         required: true
 
       to:
-        description: Can be used for setting the maximum number of results to retrieve.
-        type: string
+        description: maximum date of time slot.
+        type: date
         required: true
 
     responses:
@@ -44,11 +39,11 @@
           application/json:
             example: {
                       "code": 400,
-                      "message": "Invalid params: date 'to' must be greater than or equal to 'from'"
+                      "message": "Invalid params: 'from' date can't be greater than 'to' date"
                      }
 
 
-**Method:** `POST` <br /> 
+**Method:** `PUT` <br /> 
 **Description:** `Endpoint for booking a free time slot.`
 
     body:
@@ -62,6 +57,27 @@
     responses:
       201:
         description: Returned in case time slot was successfully booked.
+        headers: 
+          Location:
+            description: relative URL to the booked time slot.
+            example: time-slots/:id
+            type: string
+        body:
+          application/json:
+            example: {
+                       "date": "12-12-2016",
+                       "time": "9:30",
+                       "name": "Kasper Schmeichel"
+                     }
+
+      409:
+        description: Indicates that the request could not be processed because of conflict in the request.
+        body:
+          application/json:
+            example: {
+                      "code": 409,
+                      "message": "Time slot is already taken"
+                     }
 
       400:
         description: Server cannot process the request due to a client error.
@@ -88,4 +104,35 @@
             example: {
                       "code": 415,
                       "message": "Content-type should be specified. Available formats: application/json"
+                     }
+
+
+**URL:** `/time-slots/{id}`
+
+**Method:** `GET` <br />
+**Description:** `Endpoint for fetching the time slot by its id.`
+
+    uriParameters:
+      id:
+        description: time slot id.
+        type: integer
+        required: true
+
+    responses:
+      200:
+        body:
+          application/json:
+            example: {
+                       "date": "12-12-2016",
+                       "time": "9:30",
+                       "name": "Kasper Schmeichel"
+                     }
+
+      400:
+        description: Returned in case invalid parameters are provided.
+        body:  
+          application/json:
+            example: {
+                      "code": 400,
+                      "message": "Invalid params: 'from' date can't be greater than 'to' date"
                      }
