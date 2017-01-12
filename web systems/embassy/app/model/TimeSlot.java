@@ -1,4 +1,4 @@
-package model;
+package models;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.bson.Document;
@@ -7,14 +7,49 @@ import play.libs.Json;
 
 import java.time.ZonedDateTime;
 
+/**
+ * @author Vadzim_Kanavod
+ */
 public class TimeSlot {
-  public String id;
-  public ZonedDateTime date;
-  public Boolean isFree;
-  public String url;
-  public String reservationUrl;
+  private String id;
+  private Boolean isFree;
+  private ZonedDateTime date;
+  private String url;
+  private String reservationUrl;
 
   public TimeSlot() {}
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Boolean getIsFree() {
+    return isFree;
+  }
+
+  public void setIsFree(Boolean free) {
+    isFree = free;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public String getReservationUrl() {
+    return reservationUrl;
+  }
+
+  public void setReservationUrl(String reservationUrl) {
+    this.reservationUrl = reservationUrl;
+  }
 
   public String getDate() {
     return date.toString();
@@ -26,13 +61,11 @@ public class TimeSlot {
 
   public static TimeSlot fromJson(String json) {
     JsonNode timeSlotNode = Json.parse(json);
-    //System.out.println(json);
-    //System.out.println(timeSlotNode.asText());
     TimeSlot timeSlot = Json.fromJson(timeSlotNode, TimeSlot.class);
     if (timeSlot.id != null && timeSlot.url == null) {
       timeSlot.url = "/time-slots/" + timeSlot.id;
     }
-    if (timeSlot.id != null && !timeSlot.isFree) {
+    if (timeSlot.id != null && !timeSlot.getIsFree()) {
       timeSlot.reservationUrl = timeSlot.url + "/reservation";
     }
     return timeSlot;
@@ -60,5 +93,4 @@ public class TimeSlot {
     }
     return doc;
   }
-
 }

@@ -1,9 +1,12 @@
-package model;
+package models;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import play.libs.Json;
 
+/**
+ * @author Vadzim_Kanavod
+ */
 public class Reservation {
   public String id;
   public String timeSlotId;
@@ -13,8 +16,6 @@ public class Reservation {
   public String timeSlotUrl;
 
   public static Reservation fromJson(String json) {
-    //System.out.println(json);
-    //System.out.println(ticketNode.asText());
     Reservation reservation = Json.fromJson(Json.parse(json), Reservation.class);
     if (reservation.id != null && reservation.url == null) {
       reservation.url = "/time-slots/" + reservation.id + "/reservation";
@@ -44,5 +45,4 @@ public class Reservation {
 
     return doc;
   }
-
 }

@@ -1,4 +1,4 @@
-package model;
+package models;
 
 import com.mongodb.async.client.MongoCollection;
 import com.mongodb.async.client.MongoDatabase;
@@ -11,6 +11,9 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.mongodb.client.model.Filters.eq;
 
+/**
+ * @author Vadzim_Kanavod
+ */
 public class TimeSlots {
 
   private static final String TIME_SLOTS_COLLECTION_NAME = "timeslots";
@@ -34,12 +37,12 @@ public class TimeSlots {
           Logger.debug("Collecting time slots.");
           docs.forEach(doc -> {
             TimeSlot timeSlot = TimeSlot.fromJson(doc.toJson());
-            timeSlot.id = doc.getObjectId("_id").toString();
-            if (timeSlot.id != null && timeSlot.url == null) {
-              timeSlot.url = "/time-slots/" + timeSlot.id;
+            timeSlot.setId(doc.getObjectId("_id").toString());
+            if (timeSlot.getId() != null && timeSlot.getUrl() == null) {
+              timeSlot.setUrl("/time-slots/" + timeSlot.getId());
             }
-            if (timeSlot.id != null && !timeSlot.isFree) {
-              timeSlot.reservationUrl = timeSlot.url + "/reservation";
+            if (timeSlot.getId() != null && !timeSlot.getIsFree()) {
+              timeSlot.setReservationUrl(timeSlot.getUrl() + "/reservation");
             }
             timeSlots.add(timeSlot);
           });
@@ -82,7 +85,7 @@ public class TimeSlots {
         if (doc != null) {
           Logger.debug("Get time slot successfully: {}", id);
           timeSlot = TimeSlot.fromJson(doc.toJson());
-          timeSlot.id = doc.getObjectId("_id").toString();
+          timeSlot.setId(doc.getObjectId("_id").toString());
         } else {
           Logger.warn("Get time slot failed: {}", id);
         }
