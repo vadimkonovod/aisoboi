@@ -23,23 +23,21 @@
             example:  {
                         "time-slots": [
                           {
-                            "id": 1,
                             "date": 12-12-2016,
                             "time": "09:00",
                             "is_free": true,
                             "links": {
                               "self": "/time-slots/1",
-                              "reservation": "null"
+                              "reservation": null
                             }
                           },
                           {
-                            "id": 3,
                             "date": 14-12-2016,
                             "time": "11:00",
                             "is_free": true,
                             "links": {
                               "self": "/time-slots/3",
-                              "reservation": "null"
+                              "reservation": null
                             }
                           }
                         ]
@@ -71,13 +69,12 @@
         body:
           application/json:
             example: {
-                        "id": 5,
                         "date": 11-12-2016,
                         "time": "12:00",
                         "is_free": false,
                         "links": {
                           "self": "/time-slots/5",
-                          "reservation": "/reservations/2"
+                          "reservation": "time-slots/5/reservation"
                         }
                      }
 
@@ -88,6 +85,63 @@
             example: {
                       "code": 404,
                       "message": "Time slot with ID 123 not found"
+                     }
+
+
+**URL:** `time-slots/{id}/reservation`
+
+**Method:** `GET` <br />
+**Description:** `Endpoint for fetching the reservation for specified time slot.`
+
+    uriParameters:
+      id:
+        description: time slot id.
+        type: integer
+        required: true
+
+    responses:
+      200:
+        body:
+          application/json:
+            example: {
+                        "name": "Kasper Schmeichel",
+                        "id_number": "AB12345"
+                        "links": {
+                          "self": "/time-slots/1/reservation",
+                          "time-slot": "/time-slots/1"
+                        }
+                     }
+
+      404:
+        description: Returned in case reservation not found.
+        body:  
+          application/json:
+            example: {
+                      "code": 404,
+                      "message": "Reservation with ID 123 not found"
+                     }
+
+**Method:** `DELETE` <br />
+**Description:** `Endpoint for releasing of the reservation by its id.`
+
+    uriParameters:
+      id:
+        description: time slot id.
+        type: integer
+        required: true
+
+    responses:
+      204:
+        description: Returned in case reservation was successfully released.
+        body: NO CONTENT
+
+      404:
+        description: Returned in case reservation not found.
+        body:  
+          application/json:
+            example: {
+                      "code": 404,
+                      "message": "Reservation with ID 12 not found"
                      }
 
 
@@ -114,24 +168,18 @@
             example:  {
                         "reservations": [
                           {
-                            "id": 2,
                             "name": "Kasper Schmeichel",
-                            "birtdate": "17-10-1989",
                             "id_number": "AB12345"
-                            "time_slot_id": 1,
                             "links": {
-                              "self": "/reservations/2",
+                              "self": "/time-slots/1/reservation",
                               "time-slot": "/time-slots/1"
                             }
                           },
                           {
-                            "id": 5,
                             "name": "Peter Brooks",
-                            "birtdate": "06-05-1996",
                             "id_number": "BA54321"
-                            "time_slot_id": 15,
                             "links": {
-                              "self": "/reservations/5",
+                              "self": "/time-slots/15/reservation",
                               "time-slot": "/time-slots/15"
                             }
                           }
@@ -154,9 +202,8 @@
       application/json:
         example:  {
                     "name": "Kasper Schmeichel",
-                    "birtdate": "17-10-1989",
                     "id_number": "AB12345"
-                    "time_slot_id": "1"
+                    "time_slot_url": "/time-slots/1"
                   }
 
     responses:
@@ -165,18 +212,15 @@
         headers: 
           Location:
             description: relative URL to the created reservation.
-            example: reservations/{id}
+            example: /time-slots/{id}/reservation
             type: string
         body:
           application/json:
             example: {
-                        "id": 2,
                         "name": "Kasper Schmeichel",
-                        "birtdate": "17-10-1989",
                         "id_number": "AB12345"
-                        "time_slot_id": 1,
                         "links": {
-                          "self": "/reservations/2",
+                          "self": "/time-slots/1/reservation",
                           "time-slot": "/time-slots/1"
                         }
                      }
@@ -188,64 +232,4 @@
             example: {
                       "code": 400,
                       "message": "Time slot is already taken"
-                     }
-
-
-**URL:** `/reservations/{id}`
-
-**Method:** `GET` <br />
-**Description:** `Endpoint for fetching the reservation by its id.`
-
-    uriParameters:
-      id:
-        description: reservation id.
-        type: integer
-        required: true
-
-    responses:
-      200:
-        body:
-          application/json:
-            example: {
-                        "id": 2,
-                        "name": "Kasper Schmeichel",
-                        "birtdate": "17-10-1989",
-                        "id_number": "AB12345"
-                        "time_slot_id": 1,
-                        "links": {
-                          "self": "/reservations/2",
-                          "time-slot": "/time-slots/1"
-                        }
-                     }
-
-      404:
-        description: Returned in case reservation not found.
-        body:  
-          application/json:
-            example: {
-                      "code": 404,
-                      "message": "Reservation with ID 123 not found"
-                     }
-
-**Method:** `DELETE` <br />
-**Description:** `Endpoint for releasing of the reservation by its id.`
-
-    uriParameters:
-      id:
-        description: reservation id.
-        type: integer
-        required: true
-
-    responses:
-      204:
-        description: Returned in case reservation was successfully released.
-        body: NO CONTENT
-
-      404:
-        description: Returned in case reservation not found.
-        body:  
-          application/json:
-            example: {
-                      "code": 404,
-                      "message": "Reservation with ID 12 not found"
                      }
