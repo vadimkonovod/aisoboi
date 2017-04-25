@@ -14,7 +14,7 @@ class WikipediaPagesSpider(CrawlSpider):
     start_urls = ['https://en.wikipedia.org/wiki/Minsk',
                   'https://en.wikipedia.org/wiki/Python_(programming_language)']
 
-    links_xpath = '(//div[@id="mw-content-text"]/div/p/a)[position()<100]'
+    links_xpath = '(//div[@id="bodyContent"]/div/p/a)[position()<100]'
     allow_re = '/wiki/' \
                '(?!((File|Talk|Category|Portal|Special|' \
                'Template|Template_talk|Wikipedia|Help|Draft):|Main_Page)).+'
