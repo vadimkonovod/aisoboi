@@ -14,13 +14,14 @@ class WikipediaPagesSpider(CrawlSpider):
     start_urls = ['https://en.wikipedia.org/wiki/Minsk',
                   'https://en.wikipedia.org/wiki/Python_(programming_language)']
 
-    links_xpath = '(//div[@id="bodyContent"]/div/p/a)[position()<100]'
+    links_xpath = '(//div[@id="mw-content-text"]/div/p/a)[position()<100]'
     allow_re = '/wiki/' \
                '(?!((File|Talk|Category|Portal|Special|' \
                'Template|Template_talk|Wikipedia|Help|Draft):|Main_Page)).+'
     compiled_allow_re = re.compile('/wiki/'
                                    '(?!((File|Talk|Category|Portal|Special|'
                                    'Template|Template_talk|Wikipedia|Help|Draft):|Main_Page)).+')
+    snippet_xpath = 'string(//div[@id="bodyContent"]/div/p[1])'
 
     rules = (
         Rule(LinkExtractor(restrict_xpaths=links_xpath,
@@ -37,4 +38,5 @@ class WikipediaPagesSpider(CrawlSpider):
         item['url'] = response.url
         item['links'] = [response.urljoin(link) for link in response.xpath(self.links_xpath).xpath('@href').extract()
                          if self.compiled_allow_re.match(link)]
+        item['snippet'] = response.xpath(self.snippet_xpath).extract_first()[:255] + '...'
         return item
